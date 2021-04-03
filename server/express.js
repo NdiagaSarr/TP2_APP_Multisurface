@@ -9,7 +9,7 @@ app.get('/api', (req, res) => {
   res.send(mockResponse);
 });
 app.get('/', (req, res) => {
- res.status(200).send('Hello World!');
+ res.status(200).send('Ndiagadroid in the building');
 });
 app.listen(port, function () {
  console.log('App listening on port: ' + port);
