@@ -1,0 +1,23 @@
+{
+  "name": "tp2-multisurface",
+  "version": "1.0.0",
+  "description": "Application de présentation multi-surface en React",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NdiagaSarr/TP2_App_multisurface.git"
+  },
+  "author": "Ndiagadroid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NdiagaSarr/TP2_App_multisurface/issues"
+  },
+  "homepage": "https://github.com/NdiagaSarr/TP2_App_multisurface#readme"
+}
