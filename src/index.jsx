@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LOGO from '../img/my-name.gif';
+
+import Header from '../Composants/Header.jsx';
+import Content from '../Composants/Content.jsx';
 
 const Index = () => {
   return(
     <div>
-      <h2>Initialisation du tp2</h2>
-      <img src={LOGO} alt="Logo" />
+      <Header/>
+      <Content/>
     </div>
   );
 };
