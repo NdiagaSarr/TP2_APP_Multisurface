@@ -8,10 +8,10 @@ module.exports = (env, argv) => {
   console.log(argv.mode);
   return {
     entry: "./src/index.jsx",
-    output: { // NEW
+    output: {
       path: path.join(__dirname, 'dist'),
       filename: "[name].js"
-    }, // NEW Ends
+    },
     plugins: [htmlPlugin],
     module: {
       rules: [
@@ -21,6 +21,11 @@ module.exports = (env, argv) => {
           use: {
             loader: "babel-loader"
           }
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          loader: "file-loader",
+          options: { name: '/static/[name].[ext]' }
         }
       ]
     }

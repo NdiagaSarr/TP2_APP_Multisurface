@@ -14,9 +14,9 @@ const mockResponse = {
 app.get('/api', (req, res) => {
   res.send(mockResponse);
 });
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
  res.status(200).send('Ndiagadroid in the building');
-});
+});*/
 
 app.use(express.static(DIST_DIR));
 
