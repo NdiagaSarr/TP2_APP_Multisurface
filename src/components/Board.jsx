@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Board() {
+function Board(postit) {
   return (
     <div>
-      Board
+      test
+      {postit.title}
     </div>
   );
 }

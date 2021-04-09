@@ -45,7 +45,7 @@ const Tableau = [
   },
   {
     type: 'board',
-    board: '2',
+    id: '2',
     title: 'Courses',
     notes: '',
     postits: [],
@@ -53,12 +53,27 @@ const Tableau = [
 ];
 
 function App() {
-  const [boards, setBoards] = React.useState(Tableau);
+  const [boards] = React.useState(Tableau);
 
   return (
     <div className="app">
-      <AppToolbar boards={boards} index={0} />
-      <Board board={boards} index={0} />
+      <div className="postits">
+        {
+          boards.map((postits, index) => (
+            <div>
+              <AppToolbar
+                key={postits.postits.id}
+                index={index}
+                postits={postits}
+              />
+              <Board
+                index={index}
+                postits={postits.postits}
+              />
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }

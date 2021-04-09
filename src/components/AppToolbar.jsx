@@ -1,9 +1,12 @@
 import React from 'react';
 
-function AppToolbar() {
+function AppToolbar(postit) {
   return (
-    <div>
-      AppToolbar
+    <div className="postit">
+      {postit.postits.type}
+      {postit.postits.id}
+      {postit.postits.title}
+      {postit.postits.notes}
     </div>
   );
 }
