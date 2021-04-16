@@ -2,10 +2,16 @@ import React from 'react';
 
 function Board(postit) {
   return (
-    <div>
-      test
-      {postit.title}
-    </div>
+    postit.postits.postits.map((postits) => (
+      <div>
+        {postits.type}
+        {postits.board}
+        {postits.title}
+        {postits.text}
+        {postits.visible}
+        {postits.color}
+      </div>
+    ))
   );
 }
 
