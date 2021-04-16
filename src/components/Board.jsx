@@ -1,17 +1,31 @@
 import React from 'react';
-import GridView from 'react-native-super-grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import { blue } from '@material-ui/core/colors';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    height: 200,
+    width: 150,
+    background: blue[100],
+    margin: theme.spacing(2),
+  },
+}));
 
 function Board(postit) {
+  const classes = useStyles();
+
   return (
     postit.postits.postits.map((postits) => (
-      <div>
-        {postits.type}
-        {postits.board}
+      <Grid container item xs={6} className={classes.root}>
         {postits.title}
+        {' '}
+        <br />
+        {' '}
+        <br />
         {postits.text}
-        {postits.visible}
-        {postits.color}
-      </div>
+      </Grid>
     ))
   );
 }
