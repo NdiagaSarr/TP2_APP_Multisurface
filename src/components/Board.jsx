@@ -1,4 +1,5 @@
 import React from 'react';
+import GridView from 'react-native-super-grid';
 
 function Board(postit) {
   return (
