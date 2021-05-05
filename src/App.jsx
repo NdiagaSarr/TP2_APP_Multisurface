@@ -1,6 +1,9 @@
 import React from 'react';
 import Board from './components/Board';
 import AppToolbar from './components/AppToolbar';
+import store from './store/index';
+
+window.store = store;
 
 const Tableau = [
   {
@@ -56,19 +59,21 @@ function App() {
   const [boards] = React.useState(Tableau);
   return (
     <div className="app">
-      <div className="postits">
+      <div className="board">
         {
           boards.map((postits, index) => (
             <div>
               <AppToolbar
-                key={postits.postits.id}
+                key={postits.id}
                 index={index}
                 postits={postits}
               />
-              <Board
-                index={index}
-                postits={postits}
-              />
+              <div className="postits">
+                <Board
+                  index={index}
+                  postits={postits}
+                />
+              </div>
             </div>
           ))
         }
