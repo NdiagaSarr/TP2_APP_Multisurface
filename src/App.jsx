@@ -60,23 +60,16 @@ function App() {
   return (
     <div className="app">
       <div className="board">
-        {
-          boards.map((postits, index) => (
-            <div>
-              <AppToolbar
-                key={postits.id}
-                index={index}
-                postits={postits}
-              />
-              <div className="postits">
-                <Board
-                  index={index}
-                  postits={postits}
-                />
-              </div>
-            </div>
-          ))
-        }
+        <AppToolbar
+          index={0}
+          postits={boards}
+        />
+        <div className="postits">
+          <Board
+            index={0}
+            postits={boards}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,31 +1,40 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { blue } from '@material-ui/core/colors';
+import { Card, CardContent, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    flexGrow: 1,
-    height: 200,
-    width: 150,
-    background: blue[100],
-    margin: theme.spacing(2),
+    display: 'inline-block',
+    width: 250,
+    marginTop: 15,
+    marginRight: 15,
+    justifyContent: 'spaceBetween',
+    background: '#ffff98',
+  },
+
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
   },
 }));
 
-function Board(postit) {
+function Board(boards) {
   const classes = useStyles();
-
+  const { postits } = boards;
   return (
-    postit.postits.postits.map((postits) => (
-      <Grid container item xs={6} className={classes.root}>
-        {postits.title}
-        {' '}
-        <br />
-        {' '}
-        <br />
-        {postits.text}
-      </Grid>
+    postits[0].postits.map((postit) => (
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            {postit.title}
+          </Typography>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            {postit.text}
+          </Typography>
+        </CardContent>
+      </Card>
     ))
   );
 }

@@ -29,6 +29,7 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: [".js", ".jsx"],
-    }
+    },
+    //watch: argv.mode === 'development',
   };
 };

@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AppToolbar(postit) {
+function AppToolbar(boards) {
   const classes = useStyles();
-  const postits = postit;
+  const { postits } = boards;
 
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,49 +39,50 @@ function AppToolbar(postit) {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            onClick={handleMenu}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>{postits.title}</MenuItem>
-          </Menu>
-          <Typography variant="h6" className={classes.title}>
-            Ndiaga
-            
-          </Typography>
-          {auth && (
-            <div>
-              <Fab color="red" aria-label="add">
-                <AddIcon />
-              </Fab>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          onClick={handleMenu}
+          color="inherit"
+          aria-label="menu"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          {
+            postits.map((postit) => (
+              <MenuItem onClick={handleClose}>{postit.title}</MenuItem>
+            ))
+          }
+        </Menu>
+        <Typography variant="h6" className={classes.title}>
+          {postits[0].title}
+        </Typography>
+        {auth && (
+        <div>
+          <Fab color="secondary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </div>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 
