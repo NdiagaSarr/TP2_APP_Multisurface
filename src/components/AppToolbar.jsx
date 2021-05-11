@@ -67,7 +67,7 @@ function AppToolbar(boards) {
         >
           {
             postits.map((postit) => (
-              <MenuItem onClick={handleClose}>{postit.title}</MenuItem>
+              <MenuItem onClick={handleClose} key={postit.id}>{postit.title}</MenuItem>
             ))
           }
         </Menu>

@@ -25,7 +25,7 @@ function Board(boards) {
   const { postits } = boards;
   return (
     postits[0].postits.map((postit) => (
-      <Card className={classes.root}>
+      <Card className={classes.root} key={postit.title}>
         <CardContent>
           <Typography variant="h5" component="h2">
             {postit.title}

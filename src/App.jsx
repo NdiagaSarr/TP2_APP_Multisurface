@@ -2,6 +2,7 @@ import React from 'react';
 import Board from './components/Board';
 import AppToolbar from './components/AppToolbar';
 import store from './store/index';
+import Apptoolbarform from './components/Apptoolbarform';
 
 window.store = store;
 
@@ -61,15 +62,16 @@ function App() {
     <div className="app">
       <div className="board">
         <AppToolbar
-          index={0}
           postits={boards}
         />
         <div className="postits">
           <Board
-            index={0}
             postits={boards}
           />
         </div>
+        <Apptoolbarform
+          postits={boards}
+        />
       </div>
     </div>
   );
