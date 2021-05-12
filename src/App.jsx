@@ -1,5 +1,4 @@
 import React from 'react';
-import Board from './components/Board';
 import AppToolbar from './components/AppToolbar';
 import store from './store/index';
 import Apptoolbarform from './components/Apptoolbarform';
@@ -85,11 +84,7 @@ function App() {
           postits={boards}
           suppr={supprimertoolbar}
         />
-        <div className="postits">
-          <Board
-            postits={boards}
-          />
-        </div>
+        <div className="postits" />
       </div>
     </div>
   );

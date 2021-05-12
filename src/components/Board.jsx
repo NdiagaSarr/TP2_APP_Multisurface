@@ -24,7 +24,7 @@ function Board(boards) {
   const classes = useStyles();
   const { postits } = boards;
   return (
-    postits[0].postits.map((postit) => (
+    postits.postits.map((postit) => (
       <Card className={classes.root} key={postit.title} style={{ backgroundColor: postit.color }}>
         <CardContent>
           <Typography variant="h5" component="h2">
