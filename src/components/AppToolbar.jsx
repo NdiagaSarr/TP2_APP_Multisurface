@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,6 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+
+import Apptoolbarform from './Apptoolbarform';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +25,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AppToolbar(board) {
+  const [edit, setEdit] = useState({
+    id: null,
+    value: '',
+  });
+
   const classes = useStyles();
   const { postits } = board;
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const maj = (value) => {
+    board.modif(edit.id, value);
+    setEdit({
+      id: null,
+      value: 'ecrit',
+    });
+  };
+
+  if (edit.id) {
+    return <Apptoolbarform edit={edit} onSubmit={maj} />;
+  }
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -66,7 +85,10 @@ function AppToolbar(board) {
         >
           {
             postits.map((postit) => (
-              <MenuItem onClick={handleClose} key={postit.id}>{postit.title}</MenuItem>
+              <MenuItem onClick={handleClose} key={postit.id}>
+                {postit.title}
+                <button type="button" onClick={() => board.suppr(postit.id)}>Supprimer</button>
+              </MenuItem>
             ))
           }
         </Menu>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
+import { } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -9,7 +10,6 @@ const useStyles = makeStyles(() => ({
     marginTop: 15,
     marginRight: 15,
     justifyContent: 'spaceBetween',
-    background: '#ffff98',
   },
 
   title: {
@@ -25,7 +25,7 @@ function Board(boards) {
   const { postits } = boards;
   return (
     postits[0].postits.map((postit) => (
-      <Card className={classes.root} key={postit.title}>
+      <Card className={classes.root} key={postit.title} style={{ backgroundColor: postit.color }}>
         <CardContent>
           <Typography variant="h5" component="h2">
             {postit.title}

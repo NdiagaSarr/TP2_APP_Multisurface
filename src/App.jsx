@@ -69,14 +69,21 @@ function App() {
     }];
     setboards(newtoolbar);
   };
+
+  const supprimertoolbar = (id) => {
+    const rm = [...boards].filter((board) => board.id !== id);
+    setboards(rm);
+  };
+
   return (
     <div className="app">
       <Apptoolbarform
-        postits={ajoutertoolbar}
+        add={ajoutertoolbar}
       />
       <div className="board">
         <AppToolbar
           postits={boards}
+          suppr={supprimertoolbar}
         />
         <div className="postits">
           <Board

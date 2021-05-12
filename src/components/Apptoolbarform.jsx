@@ -9,7 +9,7 @@ export default function Apptoolbarform(newadd) {
   const soumettre = (e) => {
     e.preventDefault();
     if (!type || !title || !note) return;
-    newadd.postits(type, title, note, []);
+    newadd.add(type, title, note, []);
     setType('');
     setTitle('');
     setNote('');
