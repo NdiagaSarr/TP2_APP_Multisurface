@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-
-import Apptoolbarform from './Apptoolbarform';
+import { MenuList } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,28 +24,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AppToolbar(board) {
-  const [edit, setEdit] = useState({
-    id: null,
-    value: '',
-  });
-
   const classes = useStyles();
   const { postits } = board;
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  const maj = (value) => {
-    board.modif(edit.id, value);
-    setEdit({
-      id: null,
-      value: 'ecrit',
-    });
-  };
-
-  if (edit.id) {
-    return <Apptoolbarform edit={edit} onSubmit={maj} />;
-  }
+  const [choisi, setChoisi] = React.useState(postits[0].title);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,15 +68,35 @@ function AppToolbar(board) {
         >
           {
             postits.map((postit) => (
-              <MenuItem onClick={handleClose} key={postit.id}>
-                {postit.title}
-                <button type="button" onClick={() => board.suppr(postit.id)}>Supprimer</button>
-              </MenuItem>
+              <MenuList
+                onClick={handleClose}
+                key={postit.id}
+                className={classes.menuButton}
+                style={{ backgroundColor: blue }}
+              >
+                <ul>
+                  <li>{postit.title}</li>
+                  <button
+                    type="button"
+                    className={classes.menuButton}
+                    onClick={() => setChoisi(postit.title)}
+                  >
+                    Selectionner
+                  </button>
+                  <button
+                    type="button"
+                    className={classes.menuButton}
+                    onClick={() => board.suppr(postit.id)}
+                  >
+                    Supprimer
+                  </button>
+                </ul>
+              </MenuList>
             ))
           }
         </Menu>
         <Typography variant="h6" className={classes.title}>
-          {postits[0].title}
+          {choisi}
         </Typography>
         {auth && (
         <div>
