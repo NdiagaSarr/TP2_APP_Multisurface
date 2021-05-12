@@ -22,10 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AppToolbar(boards) {
+function AppToolbar(board) {
   const classes = useStyles();
-  const { postits } = boards;
-
+  const { postits } = board;
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

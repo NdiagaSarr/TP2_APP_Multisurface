@@ -1,29 +1,15 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
-export default function Apptoolbarform(postit) {
-  const { postits } = postit;
-  const [board, settoolbar] = React.useState(postits);
+export default function Apptoolbarform(newadd) {
   const [type, setType] = useState('');
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 
-  const ajoutertoolbar = (types, titles, notes) => {
-    const newtoolbar = [...board, {
-      type: types,
-      id: Math.floor(Math.random() * 10000),
-      title: titles,
-      note: notes,
-      postits: [],
-    }];
-    settoolbar(newtoolbar);
-    console.log(newtoolbar);
-  };
-
   const soumettre = (e) => {
     e.preventDefault();
     if (!type || !title || !note) return;
-    ajoutertoolbar(type, title, note, []);
+    newadd.postits(type, title, note, []);
     setType('');
     setTitle('');
     setNote('');

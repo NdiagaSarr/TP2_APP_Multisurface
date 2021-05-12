@@ -57,9 +57,23 @@ const Tableau = [
 ];
 
 function App() {
-  const [boards] = React.useState(Tableau);
+  const [boards, setboards] = React.useState(Tableau);
+
+  const ajoutertoolbar = (types, titles, notes) => {
+    const newtoolbar = [...boards, {
+      type: types,
+      id: Math.floor(Math.random() * 10000),
+      title: titles,
+      note: notes,
+      postits: [],
+    }];
+    setboards(newtoolbar);
+  };
   return (
     <div className="app">
+      <Apptoolbarform
+        postits={ajoutertoolbar}
+      />
       <div className="board">
         <AppToolbar
           postits={boards}
@@ -69,9 +83,6 @@ function App() {
             postits={boards}
           />
         </div>
-        <Apptoolbarform
-          postits={boards}
-        />
       </div>
     </div>
   );
