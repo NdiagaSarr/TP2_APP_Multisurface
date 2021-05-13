@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AppToolbar from './components/AppToolbar';
 import store from './store/index';
 import Apptoolbarform from './components/Apptoolbarform';
@@ -75,18 +76,19 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <Apptoolbarform
-        add={ajoutertoolbar}
-      />
-      <div className="board">
-        <AppToolbar
-          postits={boards}
-          suppr={supprimertoolbar}
-        />
-        <div className="postits" />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <AppToolbar
+            postits={boards}
+            suppr={supprimertoolbar}
+          />
+        </Route>
+        <Route path="/addbarre">
+          <Apptoolbarform add={ajoutertoolbar} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
