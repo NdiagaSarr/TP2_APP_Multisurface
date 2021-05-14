@@ -1,7 +1,7 @@
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,17 +15,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Apptoolbarform(newadd) {
+export default function Boardform(newadd) {
+  const { id } = useParams();
   const classes = useStyles();
   const [title, setTitle] = useState('');
-  const [text, settext] = useState('');
+  const [note, setNote] = useState('');
 
   const soumettre = (e) => {
     e.preventDefault();
-    if (!title || !text) return;
-    newadd.add(title, text, []);
+    if (!title || !note) return;
+    newadd.addboard(id, title, note);
     setTitle('');
-    settext('');
+    setNote('');
   };
 
   const changetitle = (e) => {
@@ -33,7 +34,7 @@ export default function Apptoolbarform(newadd) {
   };
 
   const changenote = (e) => {
-    settext(e.target.value);
+    setNote(e.target.value);
   };
 
   return (
@@ -51,9 +52,9 @@ export default function Apptoolbarform(newadd) {
       <TextField
         className={classes.menuButton}
         type="text"
-        label="Text"
-        value={text}
-        name="text"
+        label="Note"
+        value={note}
+        name="note"
         onChange={changenote}
       />
       {' '}

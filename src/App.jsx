@@ -1,8 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Switch,
+} from 'react-router-dom';
 import AppToolbar from './components/AppToolbar';
 import store from './store/index';
 import Board from './components/Board';
+import Boardform from './components/Boardform';
 
 window.store = store;
 
@@ -58,7 +61,10 @@ const Tableau = [
 
 function App() {
   const [boards, setboards] = React.useState(Tableau);
-
+  const liste = boards.map((postit) => (
+    postit.postits
+  ));
+  const [postits, setpostits] = React.useState(liste[0]);
   const ajoutertoolbar = (titles, notes) => {
     const newtoolbar = [...boards, {
       type: 'board',
@@ -68,6 +74,18 @@ function App() {
       postits: [],
     }];
     setboards(newtoolbar);
+  };
+
+  const ajouterboard = (id, titl, tex) => {
+    const newpostit = [...postits, {
+      type: 'postit',
+      board: id,
+      title: titl,
+      text: tex,
+      visible: 'true',
+      color: 'blue',
+    }];
+    setpostits(newpostit);
   };
 
   const supprimertoolbar = (id) => {
@@ -85,8 +103,13 @@ function App() {
         <Switch>
           <Route exact path="/:id">
             <Board
-              postits={boards}
+              postits={postits}
               addbarr={ajoutertoolbar}
+            />
+          </Route>
+          <Route path="/addboard/:id">
+            <Boardform
+              addboard={ajouterboard}
             />
           </Route>
         </Switch>

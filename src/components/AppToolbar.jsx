@@ -11,7 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { MenuList } from '@material-ui/core';
+import { Button, MenuList } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,10 +106,28 @@ function AppToolbar(board) {
             <Route exact path={path}>
               Choisissez un tableau
             </Route>
+            <Route path="/addbarre">
+              Nouveau tabeau de bord
+            </Route>
+            <Route path="/addboard">
+              Nouveau postit dans
+              {' '}
+              {choisi.title}
+            </Route>
             <Route path={`${path}${choisi.id}`}>
               {choisi.title}
             </Route>
           </Switch>
+        </Typography>
+        <Typography className={classes.title}>
+          <Link to={`addboard/${choisi.id}`}>
+            <Button
+              variant="contained"
+              color="secondary"
+            >
+              Nouveau postit
+            </Button>
+          </Link>
         </Typography>
         {auth && (
           <div>
