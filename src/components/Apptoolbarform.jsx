@@ -57,7 +57,7 @@ export default function Apptoolbarform(newadd) {
       />
       {' '}
       <br />
-      <Button className={classes.menuButton} variant="contained" color="primary">Ajouter Une nouvelle barre</Button>
+      <Button type="submit" className={classes.menuButton} variant="contained" color="primary">Ajouter Une nouvelle barre</Button>
     </form>
   );
 }
