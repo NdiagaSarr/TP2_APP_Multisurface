@@ -1,8 +1,21 @@
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    margin: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 export default function Apptoolbarform(newadd) {
+  const classes = useStyles();
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 
@@ -23,25 +36,28 @@ export default function Apptoolbarform(newadd) {
   };
 
   return (
-    <form className="add-form" onSubmit={soumettre}>
-      <input
+    <form className={classes.menuButton} onSubmit={soumettre}>
+      <TextField
+        className={classes.menuButton}
         type="text"
-        placeholder="Titre"
+        label="Titre"
         value={title}
         name="title"
         onChange={changetitle}
       />
-      <input
+      {' '}
+      <br />
+      <TextField
+        className={classes.menuButton}
         type="text"
-        placeholder="Note"
+        label="Note"
         value={note}
         name="note"
         onChange={changenote}
       />
-      <Button type="submit" className="add-button">Ajouter</Button>
-      <Link to="/">
-        <Button type="submit" className="add-button">Vers Accueil</Button>
-      </Link>
+      {' '}
+      <br />
+      <Button className={classes.menuButton} variant="contained" color="primary">Ajouter Une nouvelle barre</Button>
     </form>
   );
 }

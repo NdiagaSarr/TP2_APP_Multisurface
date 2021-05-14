@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  BrowserRouter, Link, Route, Switch, useRouteMatch,
+} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +13,6 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { MenuList } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
-import Board from './Board';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,7 @@ function AppToolbar(board) {
   const open = Boolean(anchorEl);
   const [choisi, setChoisi] = React.useState(postits[0]);
 
+  const { path } = useRouteMatch();
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,66 +44,76 @@ function AppToolbar(board) {
   };
 
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            onClick={handleMenu}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            {
-              postits.map((postit) => (
-                <MenuList
-                  onClick={handleClose}
-                  key={postit.id}
-                  className={classes.menuButton}
-                  style={{ backgroundColor: blue }}
-                >
-                  <ul>
-                    <li>{postit.title}</li>
-                    <button
-                      type="button"
-                      className={classes.menuButton}
-                      onClick={() => setChoisi(postit)}
-                    >
-                      Selectionner
-                    </button>
-                    <button
-                      type="button"
-                      className={classes.menuButton}
-                      onClick={() => board.suppr(postit.id)}
-                    >
-                      Supprimer
-                    </button>
-                  </ul>
-                </MenuList>
-              ))
-            }
-          </Menu>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          onClick={handleMenu}
+          color="inherit"
+          aria-label="menu"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          {
+                postits.map((postit) => (
+                  <MenuList
+                    onClick={handleClose}
+                    key={postit.id}
+                    className={classes.menuButton}
+                    style={{ backgroundColor: blue }}
+                  >
+                    <ul>
+                      <li>{postit.title}</li>
+                      <Link to={`${postit.id}`}>
+                        <button
+                          type="button"
+                          className={classes.menuButton}
+                          onClick={() => setChoisi(postit)}
+                        >
+                          Selectionner
+                        </button>
+                      </Link>
+                      <button
+                        type="button"
+                        className={classes.menuButton}
+                        onClick={() => board.suppr(postit.id)}
+                      >
+                        Supprimer
+                      </button>
+                    </ul>
+                  </MenuList>
+                ))
+              }
+        </Menu>
+        <BrowserRouter>
           <Typography variant="h6" className={classes.title}>
-            {choisi.title}
+            <Switch>
+              <Route exact path={path}>
+                Choisissez un tableau
+              </Route>
+              <Route path={`${path}${choisi.id}`}>
+                {choisi.title}
+              </Route>
+            </Switch>
           </Typography>
-          {auth && (
+        </BrowserRouter>
+        {auth && (
           <div>
             <Fab color="secondary" aria-label="add">
               <Link to="/addbarre">
@@ -109,11 +121,9 @@ function AppToolbar(board) {
               </Link>
             </Fab>
           </div>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Board postits={choisi} />
-    </div>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 

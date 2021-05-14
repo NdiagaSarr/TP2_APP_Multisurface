@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AppToolbar from './components/AppToolbar';
 import store from './store/index';
-import Apptoolbarform from './components/Apptoolbarform';
+import Board from './components/Board';
 
 window.store = store;
 
@@ -76,19 +76,22 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <AppToolbar
-            postits={boards}
-            suppr={supprimertoolbar}
-          />
-        </Route>
-        <Route path="/addbarre">
-          <Apptoolbarform add={ajoutertoolbar} />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <AppToolbar
+          postits={boards}
+          suppr={supprimertoolbar}
+        />
+        <Switch>
+          <Route exact path="/:id">
+            <Board
+              postits={boards}
+              addbarr={ajoutertoolbar}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
