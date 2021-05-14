@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Link, Route, Switch, useRouteMatch,
+  Link, Route, Switch, useRouteMatch,
 } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -101,18 +101,17 @@ function AppToolbar(board) {
                 ))
               }
         </Menu>
-        <BrowserRouter>
-          <Typography variant="h6" className={classes.title}>
-            <Switch>
-              <Route exact path={path}>
-                Choisissez un tableau
-              </Route>
-              <Route path={`${path}${choisi.id}`}>
-                {choisi.title}
-              </Route>
-            </Switch>
-          </Typography>
-        </BrowserRouter>
+        <Typography variant="h6" className={classes.title}>
+          <Switch>
+            <Route exact path={path}>
+              Choisissez un tableau
+            </Route>
+            <Route path={`${path}${choisi.id}`}>
+              {console.log(`${path}${choisi.id}`)}
+              {choisi.title}
+            </Route>
+          </Switch>
+        </Typography>
         {auth && (
           <div>
             <Fab color="secondary" aria-label="add">
