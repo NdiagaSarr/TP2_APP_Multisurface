@@ -107,7 +107,6 @@ function AppToolbar(board) {
               Choisissez un tableau
             </Route>
             <Route path={`${path}${choisi.id}`}>
-              {console.log(`${path}${choisi.id}`)}
               {choisi.title}
             </Route>
           </Switch>
